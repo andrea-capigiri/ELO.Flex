@@ -1,5 +1,14 @@
+
+@use "sass:map";
 @use "@angular/material" as mat;
-@import "@angular/material/theming";
+@use "@material/theme/theme-color" as mdc-theme-color;
+
+@include mat.core();
+
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "@angular/material/prebuilt-themes/purple-green.css";
+
+// Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -12,37 +21,117 @@
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
 //    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
-@include mat.all-legacy-component-typographies();
-@include mat.legacy-core();
+//@include mat.all-legacy-component-typographies();
+//@include mat.legacy-core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue.
-$candy-app-primary: mat.define-palette(mat.$blue-palette);
-$candy-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+// hue. Available color palettes: https://material.io/design/color/
+//$elo-app-primary: mat.define-palette(mat.$indigo-palette);
+//$elo-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+//
+//// The warn palette is optional (defaults to red).
+//$elo-app-warn: mat.define-palette(mat.$red-palette);
+//
+//// Create the theme object. A theme consists of configurations for individual
+//// theming systems such as "color" or "typography".
+//$elo-app-theme: mat.define-light-theme(
+//	(
+//		color: (
+//			primary: $elo-app-primary,
+//			accent: $elo-app-accent,
+//			warn: $elo-app-warn,
+//		),
+//	)
+//);
+//
+//// Include theme styles for core and each component used in your app.
+//// Alternatively, you can import and @include the theme mixins for each component
+//// that you are using.
+//@include mat.all-legacy-component-themes($elo-app-theme);
 
-// The warn palette is optional (defaults to red).
-$candy-app-warn: mat.define-palette(mat.$red-palette);
+/* You can add global styles to this file, and also import other style files */
 
-// Create the theme object (a Sass map containing all of the palettes).
-$candy-app-theme: mat.define-light-theme(
-	$candy-app-primary,
-	$candy-app-accent,
-	$candy-app-warn
-);
+// LIGHT THEME #############################################################
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.legacy-form-field-density(-2);
-@include mat.all-legacy-component-themes($candy-app-theme);
+[data-theme="light"] {
+	$primary: mat.define-palette(mat.$indigo-palette);
+	$accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+	$warn: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
+
+	$theme: mat.define-light-theme(
+		(
+			color: (
+				primary: $primary,
+				accent: $accent,
+				warn: $warn,
+			),
+			density: -1,
+			typography: mat.define-typography-config(),
+		)
+	);
+	@include mat.form-field-density(-2);
+	@include mat.all-component-colors($theme);
+	//@include mat.all-legacy-component-themes($theme);
+ 
+    color: mat.get-theme-color($theme, foreground, card);
+    background-color: mat.get-theme-color($theme, background, card);
+
+	.card {
+		background-color: mat.get-theme-color($theme, background, card);
+	}
+
+	a {
+		color: mat.get-theme-color($theme, foreground, text);
+	}
+}
+
+// DARK THEME ##############################################################
+
+[data-theme="dark"] {
+	$primary: mat.define-palette(mat.$blue-grey-palette);
+	$accent: mat.define-palette(mat.$indigo-palette, A200, A100, A400);
+	$warn: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+	$theme: mat.define-dark-theme(
+		(
+			color: (
+				primary: $primary,
+				accent: $accent,
+				warn: $warn,
+			),
+			//color: (
+			//	primary: mat.define-palette(mat.$pink-palette),
+			//	accent: mat.define-palette(mat.$blue-grey-palette),
+			//),
+			density: -1,
+			typography: mat.define-typography-config(),
+		)
+	);
+	@include mat.form-field-density(-2);
+	@include mat.all-component-colors($theme);
+	//@include mat.all-legacy-component-themes($theme);
+
+    color: mat.get-theme-color($theme, foreground, card);
+    background-color: mat.get-theme-color($theme, background, card);
+	//background-color: mat.get-theme-color($theme, background);
+
+	.card {
+		background-color: mat.get-theme-color($theme, background, card);
+	}
+
+	a {
+		color: mat.get-theme-color($theme, foreground, text);
+	}
+}
 
 html,
 body {
 	margin: 0;
 	padding: 0;
-	background: #f8f8f8;
 }
+
+// GAP #####################################################################
 
 $spacer: 1rem;
 $spacers: (

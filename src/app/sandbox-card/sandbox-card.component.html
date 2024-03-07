@@ -1,7 +1,5 @@
-<div class="app-sandbox-card"
+<div class="app-sandbox-card d-flex flex-row justify-content-center align-items-center"
      *ngIf="this.viewModel"
-     fxLayout="row"
-     fxLayoutAlign="center center"
      [ngStyle]="{ 'background-color': this.backgroundColor() }"
      [ngClass]="{ 'selected': this.viewModel.selected }"
      (click)="this.onSelect.emit(this.viewModel.index)">

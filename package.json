@@ -1,6 +1,6 @@
 {
-  "name": "andreacapigiri-angular-flex-layout",
-  "version": "11.0.0",
+  "name": "andreacapigiri-bootstrap-flex-layout",
+  "version": "17.0.0",
   "private": true,
   "scripts": {
     "start": "ng serve",

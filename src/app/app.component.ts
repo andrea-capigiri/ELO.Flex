@@ -65,12 +65,15 @@ export class AppComponent implements OnInit {
         if (!!this.fxLayoutGapValue()) this._output += ' ' + this.fxLayoutGapValue();
     }
 
+    private latestSize = 0;
     public addBox() {
         let min = 2;
-        let max = 7;
+        let max = 6;
         let tmp = new SandboxCardViewModel();
         tmp.index = this.cardList.length;
-        tmp.size = 2 * Math.floor(Math.random() * (max - min) + min);
+        do { tmp.size = 3 * Math.floor(Math.random() * (max - min) + min); }
+        while (tmp.size == this.latestSize);
+        this.latestSize = tmp.size;
         this.calcCardSizes(tmp);
         this.cardList.push(tmp);
     }

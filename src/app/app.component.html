@@ -1,101 +1,86 @@
-<div style="margin:24px;">
-    <mat-card>
-        <form [formGroup]="this.formGroup">
-            <div class="row flex-wrap">
-                <mat-form-field appearance="outline" class="col-md-3">
-                    <mat-label>Layout</mat-label>
-                    <mat-select formControlName="fxLayout">
-                        <mat-option value="flex-row">flex-row</mat-option>
-                        <mat-option value="flex-row-reverse">flex-row-reverse</mat-option>
-                        <mat-option value="flex-column">flex-column</mat-option>
-                        <mat-option value="flex-column-reverse">flex-column-reverse</mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="col-md-3">
-                    <mat-label>Wrap</mat-label>
-                    <mat-select formControlName="fxLayoutWrap">
-                        <mat-option value="">flex-nowrap</mat-option>
-                        <mat-option value="flex-wrap">flex-wrap</mat-option>
-                        <mat-option value="flex-wrap-reverse">flex-wrap-reverse</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                
-                <mat-form-field appearance="outline" class="col-md-3">
-                    <mat-label>Horizontal Align</mat-label>
-                    <mat-select formControlName="fxLayoutAlignHorizontal">
-                        <mat-option value="justify-content-start">justify-content-start</mat-option>
-                        <mat-option value="justify-content-end">justify-content-end</mat-option>
-                        <mat-option value="justify-content-center">justify-content-center</mat-option>
-                        <mat-option value="justify-content-between">justify-content-between</mat-option>
-                        <mat-option value="justify-content-around">justify-content-around</mat-option>
-                        <mat-option value="justify-content-evenly">justify-content-evenly</mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="col-md-3">
-                    <mat-label>Vertical Align</mat-label>
-                    <mat-select formControlName="fxLayoutAlignVertical">
-                        <mat-option value="align-items-start">align-items-start</mat-option>
-                        <mat-option value="align-items-end">align-items-end</mat-option>
-                        <mat-option value="align-items-center">align-items-center</mat-option>
-                        <mat-option value="align-items-baseline">align-items-baseline</mat-option>
-                        <mat-option value="align-items-stretch">align-items-stretch</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                
-                <mat-form-field appearance="outline" class="col-md-3">
-                    <mat-label>Gap</mat-label>
-                    <mat-select formControlName="fxLayoutGap">
-                        <mat-option value="0">0</mat-option>
-                        <mat-option value="1">1</mat-option>
-                        <mat-option value="2">2</mat-option>
-                        <mat-option value="3">3</mat-option>
-                        <mat-option value="4">4</mat-option>
-                        <mat-option value="5">5</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-        </form>
-        
-        <div class="d-flex flex-row justify-content-center align-items-center">
-            <button mat-button
-                [disabled]="this.cardList.length == 1"
-                (click)="this.removeBox()">Remove Box</button>
-            <div class="flex-fill"></div>
-            <button mat-button
-                [disabled]="this.cardList.length == 20"
-                (click)="this.addBox()">Add Box</button>
-        </div>
-
-        <div class="sandbox" [ngClass]="this._output">
-            <app-sandbox-card *ngFor="let $card of this.cardList"
-                              [width]="$card.width"
-                              [height]="$card.height"
-                              [viewModel]="$card"
-                              (onSelect)="this.onSelectCard($event)">
-            </app-sandbox-card>
-        </div>
-
-        <!--<mat-card style="margin:24px 0;" *ngIf="this.card">
-            <mat-form-field appearance="outline">
-                <mat-select placeholder="fxFlex" formControlName="card.fxFlex">
-                    <mat-option value="grow">grow</mat-option>
-                    <mat-option value="initial">initial</mat-option>
-                    <mat-option value="auto">auto</mat-option>
-                    <mat-option value="none">none</mat-option>
-                    <mat-option value="nogrow">nogrow</mat-option>
-                    <mat-option value="noshrink">noshrink</mat-option>
+<mat-card class="m-4 p-4">
+    <form [formGroup]="this.formGroup">
+        <div class="row flex-wrap">
+            <mat-form-field appearance="outline" class="col-md-3">
+                <mat-label>Layout</mat-label>
+                <mat-select formControlName="fxLayout">
+                    <mat-option value="flex-row">flex-row</mat-option>
+                    <mat-option value="flex-row-reverse">flex-row-reverse</mat-option>
+                    <mat-option value="flex-column">flex-column</mat-option>
+                    <mat-option value="flex-column-reverse">flex-column-reverse</mat-option>
                 </mat-select>
             </mat-form-field>
-        </mat-card>-->
 
-        <small>
-            <pre>
-&lt;div class="{{this._output}}"&gt;
-&lt;/div&gt;
-            </pre>
-        </small>
+            <mat-form-field appearance="outline" class="col-md-3">
+                <mat-label>Wrap</mat-label>
+                <mat-select formControlName="fxLayoutWrap">
+                    <mat-option value="">flex-nowrap</mat-option>
+                    <mat-option value="flex-wrap">flex-wrap</mat-option>
+                    <mat-option value="flex-wrap-reverse">flex-wrap-reverse</mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="col-md-3">
+                <mat-label>Horizontal Align</mat-label>
+                <mat-select formControlName="fxLayoutAlignHorizontal">
+                    <mat-option value="justify-content-start">justify-content-start</mat-option>
+                    <mat-option value="justify-content-end">justify-content-end</mat-option>
+                    <mat-option value="justify-content-center">justify-content-center</mat-option>
+                    <mat-option value="justify-content-between">justify-content-between</mat-option>
+                    <mat-option value="justify-content-around">justify-content-around</mat-option>
+                    <mat-option value="justify-content-evenly">justify-content-evenly</mat-option>
+                </mat-select>
+            </mat-form-field>
 
-    </mat-card>
-</div>
+            <mat-form-field appearance="outline" class="col-md-3">
+                <mat-label>Vertical Align</mat-label>
+                <mat-select formControlName="fxLayoutAlignVertical">
+                    <mat-option value="align-items-start">align-items-start</mat-option>
+                    <mat-option value="align-items-end">align-items-end</mat-option>
+                    <mat-option value="align-items-center">align-items-center</mat-option>
+                    <mat-option value="align-items-baseline">align-items-baseline</mat-option>
+                    <mat-option value="align-items-stretch">align-items-stretch</mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="col-md-3">
+                <mat-label>Gap</mat-label>
+                <mat-select formControlName="fxLayoutGap">
+                    <mat-option value="0">0</mat-option>
+                    <mat-option value="1">1</mat-option>
+                    <mat-option value="2">2</mat-option>
+                    <mat-option value="3">3</mat-option>
+                    <mat-option value="4">4</mat-option>
+                    <mat-option value="5">5</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </form>
+    
+    <div class="d-flex flex-row justify-content-center align-items-center">
+        <button mat-button
+            [disabled]="this.cardList.length == 1"
+            (click)="this.removeBox()">Remove Box</button>
+        <div class="flex-fill"></div>
+        <button mat-button
+            [disabled]="this.cardList.length == 20"
+            (click)="this.addBox()">Add Box</button>
+    </div>
+
+    <div class="sandbox" [ngClass]="this._output">
+        <app-sandbox-card *ngFor="let $card of this.cardList"
+                            [width]="$card.width"
+                            [height]="$card.height"
+                            [viewModel]="$card"
+                            (onSelect)="this.onSelectCard($event)">
+        </app-sandbox-card>
+    </div>
+
+    <small>
+        <pre class="p-4 mt-4">&lt;div class="{{this._output}}"&gt;
+&lt;/div&gt;</pre>
+    </small>
+    <!--https://getbootstrap.com/docs/5.3/utilities/flex/-->
+
+</mat-card>
+<app-theme-chooser></app-theme-chooser>
