@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { SandboxCardViewModel } from './shared/sandbox-card.model';
 
 @Component({
@@ -7,38 +8,69 @@ import { SandboxCardViewModel } from './shared/sandbox-card.model';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
-    public fxLayout: string = 'row';
-    public fxLayoutWrap: string = '';
-    public fxLayoutAlignHorizontal: string = 'center';
-    public fxLayoutAlignVertical: string = 'center';
-    public fxLayoutGap: number = 0;
+    public _output = '';
+    public formGroup: FormGroup = new FormGroup({});
 
     public card: SandboxCardViewModel = null;
     public cardList: SandboxCardViewModel[] = [];
+
+    constructor() {
+        this.formGroup.addControl('fxLayout', new FormControl('flex-row', []));
+        this.formGroup.addControl('fxLayoutWrap', new FormControl('', []));
+        this.formGroup.addControl('fxLayoutAlignHorizontal', new FormControl('justify-content-center', []));
+        this.formGroup.addControl('fxLayoutAlignVertical', new FormControl('align-items-center', []));
+        this.formGroup.addControl('fxLayoutGap', new FormControl('2', []));
+
+        this.formGroup.valueChanges
+            .subscribe(() => { this.generateOutput(); });
+        this.generateOutput();
+    }
 
     public ngOnInit() {
         for (let i = 0; i < 5; i++)
             this.addBox();
     }
 
-    public fxLayoutValue() { return (this.fxLayout || '') + (this.fxLayoutWrap ? ' ' + this.fxLayoutWrap : ''); }
-    public fxLayoutAlignValue() { return (this.fxLayoutAlignHorizontal || '') + (this.fxLayoutAlignVertical ? ' ' + this.fxLayoutAlignVertical : ''); }
-    public fxLayoutGapValue() { return (this.fxLayoutGap || 0) + 'px'; }
-
     public fxLayoutChange() {
-        for(let item of this.cardList)
+        for (let item of this.cardList)
             this.calcCardSizes(item);
     }
     public fxLayoutAlignVerticalChange() {
-        for(let item of this.cardList)
+        for (let item of this.cardList)
             this.calcCardSizes(item);
     }
 
+
+    private fxLayoutValue() {
+        return this.formGroup.get('fxLayout')?.value;
+    }
+    private fxLayoutWrapValue() {
+        return this.formGroup.get('fxLayoutWrap')?.value;
+    }
+    private fxLayoutAlignHorizontalValue() {
+        return this.formGroup.get('fxLayoutAlignHorizontal')?.value;
+    }
+    private fxLayoutAlignVerticalValue() {
+        return this.formGroup.get('fxLayoutAlignVertical')?.value;
+    }
+    private fxLayoutGapValue() {
+        return (this.formGroup.get('fxLayoutGap')?.value != '0' ? 'flex-gap-' + this.formGroup.get('fxLayoutGap')?.value : '');
+    }
+    private generateOutput() {
+        this._output = 'd-flex';
+        if (!!this.fxLayoutValue()) this._output += ' ' + this.fxLayoutValue();
+        if (!!this.fxLayoutWrapValue()) this._output += ' ' + this.fxLayoutWrapValue();
+        if (!!this.fxLayoutAlignHorizontalValue()) this._output += ' ' + this.fxLayoutAlignHorizontalValue();
+        if (!!this.fxLayoutAlignVerticalValue()) this._output += ' ' + this.fxLayoutAlignVerticalValue();
+        if (!!this.fxLayoutGapValue()) this._output += ' ' + this.fxLayoutGapValue();
+    }
+
     public addBox() {
+        let min = 2;
+        let max = 7;
         let tmp = new SandboxCardViewModel();
         tmp.index = this.cardList.length;
-        tmp.size = Math.floor(Math.random() * 160) + 80;
+        tmp.size = 2 * Math.floor(Math.random() * (max - min) + min);
         this.calcCardSizes(tmp);
         this.cardList.push(tmp);
     }
@@ -53,9 +85,9 @@ export class AppComponent implements OnInit {
     }
 
     private calcCardSizes(item: SandboxCardViewModel) {
-        item.width = `${item.size}px`;
-        item.height = `${item.size}px`;
-        if ((this.fxLayoutAlignVertical == 'stretch' || this.fxLayoutAlignVertical == '') && this.fxLayout == 'row') item.height = `initial`;
-        if ((this.fxLayoutAlignVertical == 'stretch' || this.fxLayoutAlignVertical == '') && this.fxLayout == 'column') item.width = `initial`;
+        item.width = `${item.size}rem`;
+        item.height = `${item.size}rem`;
+        if ((this.formGroup.get('fxLayoutAlignVertical')?.value?.includes('stretch') || this.formGroup.get('fxLayoutAlignVertical')?.value == '') && this.formGroup.get('fxLayout')?.value == 'row') item.height = `initial`;
+        if ((this.formGroup.get('fxLayoutAlignVertical')?.value?.includes('stretch') || this.formGroup.get('fxLayoutAlignVertical')?.value == '') && this.formGroup.get('fxLayout')?.value == 'column') item.width = `initial`;
     }
 }

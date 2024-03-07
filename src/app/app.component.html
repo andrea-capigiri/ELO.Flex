@@ -1,74 +1,85 @@
 <div style="margin:24px;">
     <mat-card>
+        <form [formGroup]="this.formGroup">
+            <div class="row flex-wrap">
+                <mat-form-field appearance="outline" class="col-md-3">
+                    <mat-label>Layout</mat-label>
+                    <mat-select formControlName="fxLayout">
+                        <mat-option value="flex-row">flex-row</mat-option>
+                        <mat-option value="flex-row-reverse">flex-row-reverse</mat-option>
+                        <mat-option value="flex-column">flex-column</mat-option>
+                        <mat-option value="flex-column-reverse">flex-column-reverse</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-        <div fxLayout="row wrap"
-             fxLayoutAlign="space-between center"
-             fxLayoutGap="12px">
-            <mat-form-field fxFlex>
-                <mat-select placeholder="fxLayout" [(ngModel)]="this.fxLayout" (selectionChange)="this.fxLayoutChange()">
-                    <mat-option value="row">row</mat-option>
-                    <mat-option value="column">column</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field fxFlex>
-                <mat-select placeholder="fxLayoutWrap" [(ngModel)]="this.fxLayoutWrap">
-                    <mat-option value="">none</mat-option>
-                    <mat-option value="wrap">wrap</mat-option>
-                </mat-select>
-                <mat-error>Collapse the window to see the effect</mat-error>
-            </mat-form-field>
-            <mat-form-field fxFlex>
-                <mat-select placeholder="Horizontal align" [(ngModel)]="this.fxLayoutAlignHorizontal">
-                    <mat-option value="">none</mat-option>
-                    <mat-option value="start">start (Default)</mat-option>
-                    <mat-option value="center">center</mat-option>
-                    <mat-option value="end">end</mat-option>
-                    <mat-option value="space-around">space-around</mat-option>
-                    <mat-option value="space-between">space-between</mat-option>
-                    <mat-option value="space-evenly">space-evenly</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field fxFlex>
-                <mat-select placeholder="Vertical align" [(ngModel)]="this.fxLayoutAlignVertical" (selectionChange)="this.fxLayoutAlignVerticalChange()">
-                    <mat-option value="">none</mat-option>
-                    <mat-option value="start">start</mat-option>
-                    <mat-option value="center">center</mat-option>
-                    <mat-option value="end">end</mat-option>
-                    <mat-option value="stretch">stretch (Default)</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field fxFlex>
-                <input matInput placeholder="fxLayoutGap" type="number" value="0" [(ngModel)]="this.fxLayoutGap">
-            </mat-form-field>
-        </div>
-        <div fxLayout="row"
-             fxLayoutAlign="space-between center">
+                <mat-form-field appearance="outline" class="col-md-3">
+                    <mat-label>Wrap</mat-label>
+                    <mat-select formControlName="fxLayoutWrap">
+                        <mat-option value="">flex-nowrap</mat-option>
+                        <mat-option value="flex-wrap">flex-wrap</mat-option>
+                        <mat-option value="flex-wrap-reverse">flex-wrap-reverse</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="col-md-3">
+                    <mat-label>Horizontal Align</mat-label>
+                    <mat-select formControlName="fxLayoutAlignHorizontal">
+                        <mat-option value="justify-content-start">justify-content-start</mat-option>
+                        <mat-option value="justify-content-end">justify-content-end</mat-option>
+                        <mat-option value="justify-content-center">justify-content-center</mat-option>
+                        <mat-option value="justify-content-between">justify-content-between</mat-option>
+                        <mat-option value="justify-content-around">justify-content-around</mat-option>
+                        <mat-option value="justify-content-evenly">justify-content-evenly</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="col-md-3">
+                    <mat-label>Vertical Align</mat-label>
+                    <mat-select formControlName="fxLayoutAlignVertical">
+                        <mat-option value="align-items-start">align-items-start</mat-option>
+                        <mat-option value="align-items-end">align-items-end</mat-option>
+                        <mat-option value="align-items-center">align-items-center</mat-option>
+                        <mat-option value="align-items-baseline">align-items-baseline</mat-option>
+                        <mat-option value="align-items-stretch">align-items-stretch</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="col-md-3">
+                    <mat-label>Gap</mat-label>
+                    <mat-select formControlName="fxLayoutGap">
+                        <mat-option value="0">0</mat-option>
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="3">3</mat-option>
+                        <mat-option value="4">4</mat-option>
+                        <mat-option value="5">5</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </form>
+        
+        <div class="d-flex flex-row justify-content-center align-items-center">
             <button mat-button
-                    [disabled]="this.cardList.length == 1"
-                    (click)="this.removeBox()">Remove Box</button>
+                [disabled]="this.cardList.length == 1"
+                (click)="this.removeBox()">Remove Box</button>
+            <div class="flex-fill"></div>
             <button mat-button
-                    [disabled]="this.cardList.length == 20"
-                    (click)="this.addBox()">Add Box</button>
+                [disabled]="this.cardList.length == 20"
+                (click)="this.addBox()">Add Box</button>
         </div>
 
-        <div class="sandbox"
-             *ngIf="this.fxLayout"
-             [fxLayout]="this.fxLayoutValue()"
-             [fxLayoutAlign]="this.fxLayoutAlignValue()"
-             [fxLayoutGap]="this.fxLayoutGapValue()">
-
+        <div class="sandbox" [ngClass]="this._output">
             <app-sandbox-card *ngFor="let $card of this.cardList"
                               [width]="$card.width"
                               [height]="$card.height"
                               [viewModel]="$card"
                               (onSelect)="this.onSelectCard($event)">
             </app-sandbox-card>
-
         </div>
 
         <!--<mat-card style="margin:24px 0;" *ngIf="this.card">
-            <mat-form-field>
-                <mat-select placeholder="fxFlex" [(ngModel)]="this.card.fxFlex">
+            <mat-form-field appearance="outline">
+                <mat-select placeholder="fxFlex" formControlName="card.fxFlex">
                     <mat-option value="grow">grow</mat-option>
                     <mat-option value="initial">initial</mat-option>
                     <mat-option value="auto">auto</mat-option>
@@ -80,18 +91,10 @@
         </mat-card>-->
 
         <small>
-            <pre>&lt;div fxLayout="{{ this.fxLayoutValue() }}"
-     fxLayoutAlign="{{ this.fxLayoutAlignValue() }}"
-     fxLayoutGap="{{ this.fxLayoutGapValue() }}"&gt;</pre>
-
-            <!--<span *ngIf="this.card">
-                <pre>&lt;div fxLayout="{{ this.fxLayoutValue() }}"
-                fxLayoutAlign="{{ this.fxLayoutAlignValue() }}"
-                fxLayoutGap="{{ this.fxLayoutGapValue() }}"&gt;</pre>
-                <pre>&lt;/div&gt;</pre>
-            </span>-->
-
-            <pre>&lt;/div&gt;</pre>
+            <pre>
+&lt;div class="{{this._output}}"&gt;
+&lt;/div&gt;
+            </pre>
         </small>
 
     </mat-card>
