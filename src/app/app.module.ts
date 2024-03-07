@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
-import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppComponent } from "./app.component";
 import { SandboxCardComponent } from "./sandbox-card/sandbox-card.component";
@@ -19,7 +18,7 @@ import { MatRadioModule } from "@angular/material/radio";
     imports: [
         BrowserModule,
         FormsModule,
-        FlexLayoutModule,
+        ReactiveFormsModule,
         BrowserAnimationsModule,
         MatSelectModule,
         MatToolbarModule,
@@ -36,4 +35,4 @@ import { MatRadioModule } from "@angular/material/radio";
     bootstrap: [
         AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
