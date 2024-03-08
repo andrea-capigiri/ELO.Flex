@@ -1,0 +1,29 @@
+html,
+body,
+my-app {
+	margin: 0 !important;
+	padding: 0 !important;
+	min-height: 100vh !important;
+	display: block !important;
+	overflow: auto !important;
+	position: relative !important;
+	box-sizing: border-box !important;
+}
+
+// GAP #####################################################################
+
+$spacer: 1rem;
+$spacers: (
+	0: 0,
+	1: $spacer * 0.25,
+	2: $spacer * 0.5,
+	3: $spacer,
+	4: $spacer * 1.5,
+	5: $spacer * 3,
+);
+
+@each $i, $space in $spacers {
+	.d-flex.flex-gap-#{$i} {
+		gap: #{$space} !important;
+	}
+}

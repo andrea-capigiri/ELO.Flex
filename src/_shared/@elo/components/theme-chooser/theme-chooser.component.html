@@ -1,0 +1,8 @@
+<ng-container *ngIf="this.visible==true">
+
+    <button mat-icon-button (click)="this.onThemeChange()">
+        <mat-icon *ngIf="this.theme=='light'">dark_mode</mat-icon>
+        <mat-icon *ngIf="this.theme=='dark'">light_mode</mat-icon>
+    </button>
+
+</ng-container>

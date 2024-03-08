@@ -1,0 +1,20 @@
+@use "@angular/material" as mat;
+
+:host {
+    display: block;
+	position: fixed;
+	z-index: 999;
+	left: 0.5rem;
+	bottom: 0.5rem;
+    line-height: 1;
+
+	button {
+		opacity: 0.6;
+		zoom: 0.8;
+		backdrop-filter: blur(10px);
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+}
