@@ -8,9 +8,30 @@ import { SandboxCardViewModel } from './shared/sandbox-card.model';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+    public _outputClass = '';
     public _output = '';
-    public formGroup: FormGroup = new FormGroup({});
+    public _scss = `// BOOTSTRAP FLEX LAYOUT # GAP RULES #####################################################################
+// https://andreacapigiri.com/bootstrap-flex-layout/
 
+$spacer: 1rem;
+$spacers: (
+   0: 0,
+   1: $spacer * 0.25,
+   2: $spacer * 0.5,
+   3: $spacer,
+   4: $spacer * 1.5,
+   5: $spacer * 3,
+);
+
+@each $i, $space in $spacers {
+   .d-flex.flex-gap-#{$i} {
+      gap: #{$space} !important;
+   }
+}
+
+// BOOTSTRAP FLEX LAYOUT # GAP RULES #####################################################################`;
+
+    public formGroup: FormGroup = new FormGroup({});
     public card: SandboxCardViewModel = null;
     public cardList: SandboxCardViewModel[] = [];
 
@@ -57,12 +78,14 @@ export class AppComponent implements OnInit {
         return (this.formGroup.get('fxLayoutGap')?.value != '0' ? 'flex-gap-' + this.formGroup.get('fxLayoutGap')?.value : '');
     }
     private generateOutput() {
-        this._output = 'd-flex';
-        if (!!this.fxLayoutValue()) this._output += ' ' + this.fxLayoutValue();
-        if (!!this.fxLayoutWrapValue()) this._output += ' ' + this.fxLayoutWrapValue();
-        if (!!this.fxLayoutAlignHorizontalValue()) this._output += ' ' + this.fxLayoutAlignHorizontalValue();
-        if (!!this.fxLayoutAlignVerticalValue()) this._output += ' ' + this.fxLayoutAlignVerticalValue();
-        if (!!this.fxLayoutGapValue()) this._output += ' ' + this.fxLayoutGapValue();
+        this._outputClass = 'd-flex';
+        if (!!this.fxLayoutValue()) this._outputClass += ' ' + this.fxLayoutValue();
+        if (!!this.fxLayoutWrapValue()) this._outputClass += ' ' + this.fxLayoutWrapValue();
+        if (!!this.fxLayoutAlignHorizontalValue()) this._outputClass += ' ' + this.fxLayoutAlignHorizontalValue();
+        if (!!this.fxLayoutAlignVerticalValue()) this._outputClass += ' ' + this.fxLayoutAlignVerticalValue();
+        if (!!this.fxLayoutGapValue()) this._outputClass += ' ' + this.fxLayoutGapValue();
+        this._output = `<div class="${this._outputClass}">
+</div>`;
     }
 
     private latestSize = 0;

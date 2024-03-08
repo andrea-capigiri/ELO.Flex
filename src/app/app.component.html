@@ -21,7 +21,7 @@
             </mat-form-field>
             
             <mat-form-field appearance="outline" class="col-md-3">
-                <mat-label>Horizontal Align</mat-label>
+                <mat-label>Justify Content</mat-label>
                 <mat-select formControlName="fxLayoutAlignHorizontal">
                     <mat-option value="justify-content-start">justify-content-start</mat-option>
                     <mat-option value="justify-content-end">justify-content-end</mat-option>
@@ -33,7 +33,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="col-md-3">
-                <mat-label>Vertical Align</mat-label>
+                <mat-label>Align Items</mat-label>
                 <mat-select formControlName="fxLayoutAlignVertical">
                     <mat-option value="align-items-start">align-items-start</mat-option>
                     <mat-option value="align-items-end">align-items-end</mat-option>
@@ -67,7 +67,7 @@
             (click)="this.addBox()">Add Box</button>
     </div>
 
-    <div class="sandbox" [ngClass]="this._output">
+    <div class="sandbox" [ngClass]="this._outputClass">
         <app-sandbox-card *ngFor="let $card of this.cardList"
                             [width]="$card.width"
                             [height]="$card.height"
@@ -77,8 +77,13 @@
     </div>
 
     <small>
-        <pre class="p-4 mt-4">&lt;div class="{{this._output}}"&gt;
-&lt;/div&gt;</pre>
+        <pre class="m-0"><code [highlight]="this._scss" [languages]="[ 'scss' ]" [lineNumbers]="true"></code></pre>
+    </small>
+    
+    <mat-divider class="mt-2 mb-2"></mat-divider>
+
+    <small>
+        <pre class="m-0"><code [highlight]="this._output" [languages]="[ 'html' ]" [lineNumbers]="true"></code></pre>
     </small>
     <!--https://getbootstrap.com/docs/5.3/utilities/flex/-->
 
