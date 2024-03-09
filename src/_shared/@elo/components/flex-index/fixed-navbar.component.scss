@@ -1,0 +1,84 @@
+@use "@angular/material" as mat;
+@use "./../../../../theme.scss" as s;
+
+:host {
+	display: block;
+	position: fixed;
+	z-index: 999;
+	line-height: 1;
+	left: 50%;
+	transform: translate(-50%, 0);
+
+	&.top {
+		top: 0.8rem;
+	}
+	&.bottom {
+		bottom: 0.8rem;
+	}
+
+	nav {
+		padding: 0.5rem;
+		border-width: 1px;
+		border-style: solid;
+		border-radius: 100rem;
+		outline-offset: -2px;
+		backdrop-filter: blur(0.5rem);
+
+		.navbar-nav {
+			gap: 0.5rem;
+			display: flex;
+			flex-direction: row;
+
+			.nav-item {
+				a {
+					cursor: pointer;
+					display: inline-block;
+					padding: 0 1rem;
+					line-height: 2.2rem;
+					border-radius: 100rem;
+				}
+			}
+		}
+	}
+}
+
+body[data-theme="light"] {
+	:host {
+		nav {
+			border-color: #00000080;
+			background-color: #00000012;
+			box-shadow: -2px 2px 1rem #00000018;
+			outline: 1px solid #ffffff80;
+
+			.navbar-nav {
+				.nav-item {
+					a.active,
+					a:hover {
+						//color: mat.get-theme-color(s.$theme, foreground, default);
+						background-color: #00000080;
+					}
+				}
+			}
+		}
+	}
+}
+body[data-theme="dark"] {
+	:host {
+		nav {
+			border-color: #ffffff80;
+			background-color: #ffffff12;
+			box-shadow: -2px 2px 1rem #ffffff18;
+			outline: 1px solid #00000080;
+
+			.navbar-nav {
+				.nav-item {
+					a.active,
+					a:hover {
+						//color: mat.get-theme-color(s.$theme, foreground, default);
+						background-color: #ffffff80;
+					}
+				}
+			}
+		}
+	}
+}

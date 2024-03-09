@@ -1,20 +1,44 @@
 @use "@angular/material" as mat;
 
 :host {
-    display: block;
+	display: block;
 	position: fixed;
 	z-index: 999;
-	left: 0.5rem;
-	bottom: 0.5rem;
-    line-height: 1;
+	left: 0.8rem;
+	bottom: 0.8rem;
+	line-height: 1;
 
 	button {
-		opacity: 0.6;
 		zoom: 0.8;
-		backdrop-filter: blur(10px);
+		//opacity: 0.8;
+		border-radius: 5rem;
+		border-width: 1px;
+		border-style: solid;
+		backdrop-filter: blur(0.5rem);
 
 		&:hover {
-			opacity: 1;
+			//opacity: 1;
+		}
+	}
+}
+
+body[data-theme="light"] {
+	:host {
+		color: black;
+		button {
+			border-color: #00000080;
+			background-color: #00000012;
+			box-shadow: -2px 2px 1rem #00000018;
+		}
+	}
+}
+body[data-theme="dark"] {
+	:host {
+		color: white;
+		button {
+			border-color: #ffffff80;
+			background-color: #ffffff12;
+			box-shadow: -2px 2px 1rem #ffffff18;
 		}
 	}
 }

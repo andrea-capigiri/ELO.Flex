@@ -1,0 +1,12 @@
+<nav class="navbar">
+    <ul class="navbar-nav">
+
+        <li class="nav-item"
+            *ngFor="let $item of this.links">
+            <a class="nav-link" [navigateTo]="$item.navigateTo">
+                {{$item.label}}
+            </a>
+        </li>
+
+    </ul>
+</nav>
