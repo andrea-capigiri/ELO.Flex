@@ -13,9 +13,10 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HIGHLIGHT_OPTIONS, HighlightModule } from "ngx-highlightjs";
+import { FixedNavbarComponent } from './../_shared/@elo/components/flex-index/fixed-navbar.component';
+import { ThemeChooserComponent } from './../_shared/@elo/components/theme-chooser/theme-chooser.component';
 import { AppComponent } from "./app.component";
 import { SandboxCardComponent } from "./sandbox-card/sandbox-card.component";
-import { ThemeChooserComponent } from './theme-chooser/theme-chooser.component';
 
 @NgModule({
     imports: [
@@ -34,7 +35,8 @@ import { ThemeChooserComponent } from './theme-chooser/theme-chooser.component';
         MatDatepickerModule,
         MatCheckboxModule,
         MatRadioModule,
-        ThemeChooserComponent],
+        ThemeChooserComponent,
+        FixedNavbarComponent],
     declarations: [
         AppComponent,
         SandboxCardComponent],
