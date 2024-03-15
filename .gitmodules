@@ -1,0 +1,4 @@
+[submodule "src/_shared/@elo"]
+	path = src/_shared/@elo
+	url = https://github.com/andrea-capigiri/ELO.AngularKit.git
+	branch = main
